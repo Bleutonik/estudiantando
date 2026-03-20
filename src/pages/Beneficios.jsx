@@ -187,6 +187,8 @@ export default function Beneficios() {
             <img
               src={img('1521737604038-8a02e3b2b5e9')}
               alt="Estudiante trabajando"
+              loading="lazy"
+              decoding="async"
               className="w-full h-96 object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#1c0a2a]/50 to-transparent" />

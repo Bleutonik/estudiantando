@@ -39,9 +39,11 @@ export default function Navbar() {
 
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2.5 group">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#f789da] to-[#c41fa0] flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
-                <span className="text-white text-lg">📚</span>
-              </div>
+              <img
+                src="/logo.png"
+                alt="Estudiantando"
+                className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-200"
+              />
               <div className="leading-tight">
                 <span className="font-bold text-lg text-[#1c0a2a] block leading-none">Estudiantando</span>
                 <span className="text-[10px] text-[#808285] font-medium">Tips para Estudiantes</span>

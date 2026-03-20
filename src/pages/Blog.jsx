@@ -122,6 +122,8 @@ export default function Blog() {
               <img
                 src={featured.photo}
                 alt={featured.title}
+                loading="eager"
+                decoding="async"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 absolute inset-0"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/20" />
@@ -179,6 +181,8 @@ export default function Blog() {
                 <img
                   src={post.photo}
                   alt={post.title}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 absolute inset-0"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />

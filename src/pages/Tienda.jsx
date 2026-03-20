@@ -2,7 +2,7 @@ import { useState, useRef } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { ShoppingCart, Star, Search, Eye } from 'lucide-react'
 
-const img = (id) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=800&q=80`
+const img = (id) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=400&q=75`
 
 const allProducts = [
   // MASTERCLASS / CURSOS
@@ -206,6 +206,8 @@ function ProductCard({ p, i, inView, cart, addToCart }) {
         <img
           src={p.photo}
           alt={p.name}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
         />
         {/* gradient overlay */}

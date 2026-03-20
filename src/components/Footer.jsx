@@ -40,10 +40,8 @@ export default function Footer() {
         <div className="grid lg:grid-cols-5 gap-10 mb-12">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <Link to="/" className="flex items-center gap-2.5 mb-5">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#f789da] to-[#c41fa0] flex items-center justify-center">
-                <span className="text-lg">📚</span>
-              </div>
+            <Link to="/" className="flex items-center gap-3 mb-5">
+              <img src="/logo.png" alt="Estudiantando" className="w-10 h-10 object-contain" />
               <div>
                 <span className="font-bold text-lg block leading-none">Estudiantando</span>
                 <span className="text-[10px] text-white/40">Tips para Estudiantes</span>
