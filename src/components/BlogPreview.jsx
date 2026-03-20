@@ -1,14 +1,14 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { Clock, User } from 'lucide-react'
+import { Clock, User, ArrowRight } from 'lucide-react'
 
-// Real blog posts from estudiantando.com.ar by Nina Aragona
+const img = (id) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=800&q=80`
+
 const posts = [
   {
     id: 1,
-    emoji: '📋',
-    gradient: 'from-[#fef0fc] to-[#f9b3ef]',
+    photo: img('1434030216411-0b793f4b4173'),
     category: 'Organización',
     categoryColor: 'bg-[#fef0fc] text-[#c41fa0]',
     title: 'Si no estás pudiendo cumplir con tu plan de rendida, seguramente te esté pasando esto',
@@ -20,8 +20,7 @@ const posts = [
   },
   {
     id: 2,
-    emoji: '😰',
-    gradient: 'from-yellow-50 to-orange-50',
+    photo: img('1456513080510-7bf3a84b82f8'),
     category: 'Rendir exámenes',
     categoryColor: 'bg-yellow-100 text-yellow-700',
     title: 'Los errores que te hacen rendir con nervios y el secreto para rendir con seguridad',
@@ -33,8 +32,7 @@ const posts = [
   },
   {
     id: 3,
-    emoji: '🗂️',
-    gradient: 'from-purple-50 to-[#fef0fc]',
+    photo: img('1484480974693-6ca0a78fb36b'),
     category: 'Organización',
     categoryColor: 'bg-purple-100 text-purple-700',
     title: 'Por qué a veces aunque "te organizás" la organización no funciona',
@@ -48,7 +46,7 @@ const posts = [
 
 export default function BlogPreview() {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const inView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
     <section className="py-24 bg-white" ref={ref}>
@@ -68,8 +66,12 @@ export default function BlogPreview() {
             </h2>
             <p className="text-[#808285] mt-2">Por Nina Aragona, Lic. en Cs. de la Educación</p>
           </div>
-          <Link to="/blog" className="inline-flex items-center gap-2 text-[#c41fa0] font-semibold hover:gap-3 transition-all text-sm">
-            Ver todos los artículos →
+          <Link
+            to="/blog"
+            className="inline-flex items-center gap-2 text-[#c41fa0] font-semibold hover:gap-3 transition-all text-sm group"
+          >
+            Ver todos los artículos
+            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </motion.div>
 
@@ -80,12 +82,19 @@ export default function BlogPreview() {
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.12 }}
-              className="group bg-white rounded-3xl border border-[#f9b3ef]/30 shadow-sm hover:shadow-xl hover:shadow-[#f789da]/10 overflow-hidden hover:-translate-y-2 transition-all duration-300 cursor-pointer"
+              className="group bg-white rounded-3xl border border-[#f9b3ef]/30 shadow-sm hover:shadow-2xl hover:shadow-[#f789da]/10 overflow-hidden hover:-translate-y-2 transition-all duration-300 cursor-pointer"
             >
-              {/* Cover */}
-              <div className={`bg-gradient-to-br ${post.gradient} h-44 flex items-center justify-center relative`}>
-                <span className="text-6xl float-anim">{post.emoji}</span>
-                <span className={`absolute top-4 left-4 ${post.categoryColor} text-xs font-semibold px-3 py-1 rounded-full`}>
+              {/* Photo cover */}
+              <div className="relative h-52 overflow-hidden">
+                <img
+                  src={post.photo}
+                  alt={post.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                {/* Dark gradient at bottom of photo */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                {/* Category badge on photo */}
+                <span className={`absolute top-4 left-4 ${post.categoryColor} text-xs font-semibold px-3 py-1 rounded-full shadow`}>
                   {post.category}
                 </span>
               </div>

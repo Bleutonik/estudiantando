@@ -1,14 +1,14 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { Star, ShoppingCart } from 'lucide-react'
+import { Star, ShoppingCart, ArrowRight } from 'lucide-react'
 
-// Real products from estudiantando.com.ar
+const img = (id) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=800&q=80`
+
 const featured = [
   {
     id: 1,
-    emoji: '🎓',
-    gradient: 'from-[#fef0fc] to-[#f9b3ef]',
+    photo: img('1580582932707-520aed937b7b'),
     category: 'Quiero rendir',
     name: 'Masterclass | transformá tus pendientes en aprobados',
     desc: '20 videos a tu ritmo + materiales + foro activo. Todo lo que necesitás para dejar de postergar y empezar a rendir.',
@@ -20,8 +20,7 @@ const featured = [
   },
   {
     id: 2,
-    emoji: '📖',
-    gradient: 'from-yellow-50 to-yellow-100',
+    photo: img('1481627834876-b7833e8f5570'),
     category: 'Quiero aprender mejor',
     name: 'Ebook | Técnicas para estudiar y aprender mejor',
     desc: 'Más de 60 páginas con técnicas de resumen, repaso, subrayado y cómo descubrir tu estilo de aprendizaje.',
@@ -33,8 +32,7 @@ const featured = [
   },
   {
     id: 3,
-    emoji: '📋',
-    gradient: 'from-pink-50 to-[#fef0fc]',
+    photo: img('1507925921958-8a62f3d1a50d'),
     category: 'Quiero organizarme',
     name: 'Kit Planillas para organizarte',
     desc: '32 páginas de planillas prácticas: organizadores semanales, seguimiento de TPs, listado de dudas y 24 pósters motivacionales.',
@@ -46,8 +44,7 @@ const featured = [
   },
   {
     id: 4,
-    emoji: '✅',
-    gradient: 'from-purple-50 to-blue-50',
+    photo: img('1456513080510-7bf3a84b82f8'),
     category: 'Quiero rendir',
     name: 'Guía para rendir exámenes en 6 pasos',
     desc: 'PDF interactivo de 60 páginas con un proceso estructurado de 6 pasos para organizar y activar tu preparación.',
@@ -61,7 +58,7 @@ const featured = [
 
 export default function Products() {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const inView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
     <section className="py-24 bg-[#fdf5fc]" ref={ref}>
@@ -82,9 +79,10 @@ export default function Products() {
           </div>
           <Link
             to="/tienda"
-            className="inline-flex items-center gap-2 text-[#c41fa0] font-semibold hover:gap-3 transition-all text-sm"
+            className="inline-flex items-center gap-2 text-[#c41fa0] font-semibold hover:gap-3 transition-all text-sm group"
           >
-            Ver los 23 recursos →
+            Ver los 23 recursos
+            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </motion.div>
 
@@ -95,12 +93,18 @@ export default function Products() {
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group bg-white rounded-3xl border border-[#f9b3ef]/40 shadow-sm hover:shadow-xl hover:shadow-[#f789da]/10 hover:-translate-y-2 transition-all duration-300 overflow-hidden"
+              className="group bg-white rounded-3xl border border-[#f9b3ef]/40 shadow-sm hover:shadow-2xl hover:shadow-[#f789da]/15 hover:-translate-y-3 transition-all duration-300 overflow-hidden"
             >
-              <div className={`bg-gradient-to-br ${p.gradient} h-40 flex items-center justify-center relative`}>
-                <span className="text-6xl float-anim">{p.emoji}</span>
+              {/* Photo */}
+              <div className="relative h-48 overflow-hidden">
+                <img
+                  src={p.photo}
+                  alt={p.name}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                 {p.badge && (
-                  <span className={`absolute top-3 left-3 ${p.badgeColor} text-white text-[11px] font-bold px-3 py-1 rounded-full`}>
+                  <span className={`absolute top-3 left-3 ${p.badgeColor} text-white text-[11px] font-bold px-3 py-1 rounded-full shadow`}>
                     {p.badge}
                   </span>
                 )}
@@ -108,7 +112,9 @@ export default function Products() {
 
               <div className="p-5">
                 <p className="text-[11px] text-[#c41fa0] font-semibold mb-1 uppercase tracking-wide">{p.category}</p>
-                <h3 className="font-bold text-[#1c0a2a] text-sm mb-2 line-clamp-2 leading-snug">{p.name}</h3>
+                <h3 className="font-bold text-[#1c0a2a] text-sm mb-2 line-clamp-2 leading-snug group-hover:text-[#c41fa0] transition-colors">
+                  {p.name}
+                </h3>
                 <p className="text-xs text-[#808285] mb-3 line-clamp-2">{p.desc}</p>
 
                 <div className="flex items-center gap-1 mb-4">
@@ -118,7 +124,10 @@ export default function Products() {
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <span className="text-xl font-bold text-[#1c0a2a]">${p.price} <span className="text-xs font-normal text-[#808285]">USD</span></span>
+                  <span className="text-xl font-bold text-[#1c0a2a]">
+                    ${p.price}{' '}
+                    <span className="text-xs font-normal text-[#808285]">USD</span>
+                  </span>
                   <button className="flex items-center gap-1 bg-[#f789da] hover:bg-[#c41fa0] text-white text-xs font-semibold px-3 py-2 rounded-xl transition-all hover:scale-105 shadow-sm shadow-pink-200">
                     <ShoppingCart size={13} />
                     Agregar
@@ -129,11 +138,10 @@ export default function Products() {
           ))}
         </div>
 
-        {/* Payment note */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.6 }}
           className="text-center text-sm text-[#808285] mt-8"
         >
           💳 Pagá en hasta <strong>12 cuotas con Mercado Pago</strong> (sin necesidad de tarjeta de crédito) • Acceso inmediato y de por vida
