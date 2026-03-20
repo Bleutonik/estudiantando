@@ -75,7 +75,41 @@ h1, h2, h3, h4, h5, h6 {
 .float-anim-slow { animation: float 9s ease-in-out infinite; }
 .float-anim-fast { animation: float 4s ease-in-out infinite; }
 
-/* Blob */
+/* ── Glass morphism utilities ── */
+.glass {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.glass-white {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.glass-pink {
+  background: rgba(247, 137, 218, 0.10);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(247, 137, 218, 0.22);
+}
+.glass-card {
+  background: rgba(255, 255, 255, 0.80);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 32px rgba(247, 137, 218, 0.08);
+}
+
+/* ── Hide scrollbar (for horizontal stories) ── */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ── iOS safe area bottom ── */
+.pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+
+/* ── Blob
 @keyframes blob {
   0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
   50%       { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }

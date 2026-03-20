@@ -93,7 +93,7 @@ export default function Products() {
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group bg-white rounded-3xl border border-[#f9b3ef]/40 shadow-sm hover:shadow-2xl hover:shadow-[#f789da]/15 hover:-translate-y-3 transition-all duration-300 overflow-hidden"
+              className="group glass-card rounded-3xl hover:shadow-2xl hover:shadow-[#f789da]/15 hover:-translate-y-3 transition-all duration-300 overflow-hidden"
             >
               {/* Photo */}
               <div className="relative h-48 overflow-hidden">

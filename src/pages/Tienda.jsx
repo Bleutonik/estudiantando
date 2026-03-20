@@ -199,7 +199,7 @@ function ProductCard({ p, i, inView, cart, addToCart }) {
       transition={{ duration: 0.4, delay: Math.min(i * 0.06, 0.5) }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="group bg-white rounded-3xl border border-[#f9b3ef]/30 shadow-sm hover:shadow-2xl hover:shadow-[#f789da]/15 hover:-translate-y-2 transition-all duration-300 overflow-hidden cursor-pointer"
+      className="group glass-card rounded-3xl hover:shadow-2xl hover:shadow-[#f789da]/15 hover:-translate-y-2 transition-all duration-300 overflow-hidden cursor-pointer"
     >
       {/* Photo */}
       <div className="relative h-48 overflow-hidden">
@@ -360,7 +360,7 @@ export default function Tienda() {
         </motion.p>
 
         {/* Grid */}
-        <div ref={gridRef} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
           <AnimatePresence mode="popLayout">
             {filtered.map((p, i) => (
               <ProductCard key={p.id} p={p} i={i} inView={inView} cart={cart} addToCart={addToCart} />

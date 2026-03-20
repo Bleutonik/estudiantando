@@ -86,7 +86,7 @@ export default function Features() {
             >
               <Link
                 to={cat.to}
-                className={`group block relative ${cat.lightBg} border ${cat.border} rounded-3xl p-7 card-hover hover:shadow-xl ${cat.hoverShadow} transition-all duration-300 h-full`}
+                className={`group block relative glass-card rounded-3xl p-7 card-hover hover:shadow-xl ${cat.hoverShadow} transition-all duration-300 h-full`}
               >
                 <span className="absolute top-4 right-4 bg-white text-[#c41fa0] text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm">
                   {cat.tag}

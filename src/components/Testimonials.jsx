@@ -88,7 +88,7 @@ export default function Testimonials() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -30 }}
               transition={{ duration: 0.35 }}
-              className="bg-white rounded-3xl p-8 lg:p-10 shadow-xl shadow-[#f789da]/8 border border-[#f9b3ef]/30"
+              className="glass-card rounded-3xl p-8 lg:p-10 shadow-xl shadow-[#f789da]/8"
             >
               <div className="flex gap-1 mb-5">
                 {Array(testimonials[current].rating).fill(0).map((_, i) => (

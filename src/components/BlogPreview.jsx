@@ -82,7 +82,7 @@ export default function BlogPreview() {
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.12 }}
-              className="group bg-white rounded-3xl border border-[#f9b3ef]/30 shadow-sm hover:shadow-2xl hover:shadow-[#f789da]/10 overflow-hidden hover:-translate-y-2 transition-all duration-300 cursor-pointer"
+              className="group glass-card rounded-3xl hover:shadow-2xl hover:shadow-[#f789da]/10 overflow-hidden hover:-translate-y-2 transition-all duration-300 cursor-pointer"
             >
               {/* Photo cover */}
               <div className="relative h-52 overflow-hidden">
