@@ -1,18 +1,20 @@
 import { Link } from 'react-router-dom'
-import { BookOpen, Instagram, Youtube, Twitter } from 'lucide-react'
 
-const links = {
-  Recursos: [
+const footerLinks = {
+  Tienda: [
     { label: 'Quiero rendir', to: '/tienda' },
     { label: 'Quiero aprender mejor', to: '/tienda' },
     { label: 'Quiero organizarme', to: '/tienda' },
-    { label: 'Combos especiales', to: '/tienda' },
+    { label: 'Meditaciones', to: '/tienda' },
+    { label: 'Combos con descuento', to: '/tienda' },
+    { label: 'Asesoría personalizada', to: '/tienda' },
   ],
-  Empresa: [
-    { label: 'Nuestra historia', to: '/' },
+  Contenido: [
     { label: 'Blog', to: '/blog' },
     { label: 'Beneficios', to: '/beneficios' },
-    { label: 'Contacto', to: '/contacto' },
+    { label: 'Nuestra historia', to: '/' },
+    { label: 'Testimonios', to: '/' },
+    { label: 'Hablanos', to: '/contacto' },
   ],
   Legal: [
     { label: 'Términos y condiciones', to: '/' },
@@ -22,56 +24,72 @@ const links = {
   ],
 }
 
+// Real social media from estudiantando.com.ar
 const socials = [
-  { Icon: Instagram, href: 'https://instagram.com', label: 'Instagram' },
-  { Icon: Youtube, href: 'https://youtube.com', label: 'YouTube' },
-  { Icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
+  { name: 'Instagram', handle: '@estudiantando', color: '#8a3ab9', icon: '📸', href: 'https://instagram.com/estudiantando' },
+  { name: 'TikTok', handle: '@estudiantando', color: '#e96651', icon: '🎵', href: 'https://tiktok.com/@estudiantando' },
+  { name: 'LinkedIn', handle: 'Estudiantando', color: '#1c86c6', icon: '💼', href: 'https://linkedin.com/company/estudiantando' },
+  { name: 'Facebook', handle: 'estudiantando.ok', color: '#557dbc', icon: '👥', href: 'https://facebook.com/estudiantando.ok' },
 ]
 
 export default function Footer() {
   return (
-    <footer className="bg-violet-950 text-white">
+    <footer className="bg-[#1c0a2a] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
+
         <div className="grid lg:grid-cols-5 gap-10 mb-12">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-400 to-pink-400 flex items-center justify-center">
-                <BookOpen size={18} className="text-white" />
+            <Link to="/" className="flex items-center gap-2.5 mb-5">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#f789da] to-[#c41fa0] flex items-center justify-center">
+                <span className="text-lg">📚</span>
               </div>
-              <span className="font-bold text-xl">Estudiantando</span>
+              <div>
+                <span className="font-bold text-lg block leading-none">Estudiantando</span>
+                <span className="text-[10px] text-white/40">Tips para Estudiantes</span>
+              </div>
             </Link>
-            <p className="text-white/50 leading-relaxed mb-6 max-w-xs">
-              La plataforma educativa argentina que te ayuda a organizarte, aprender mejor y rendir tus exámenes con confianza.
+
+            <p className="text-white/40 text-sm leading-relaxed mb-5 max-w-xs">
+              La plataforma educativa para estudiantes argentinos que quieren organizarse, aprender mejor y rendir con confianza.
             </p>
-            {/* Social */}
-            <div className="flex gap-3">
-              {socials.map(({ Icon, href, label }) => (
+
+            {/* Contact */}
+            <div className="space-y-2 mb-6">
+              <a href="mailto:clientes@estudiantando.com" className="flex items-center gap-2 text-sm text-white/40 hover:text-[#f789da] transition-colors">
+                <span>✉️</span> clientes@estudiantando.com
+              </a>
+              <p className="flex items-center gap-2 text-sm text-white/40">
+                <span>🕐</span> Lunes a viernes, 9 a 17hs
+              </p>
+            </div>
+
+            {/* Socials */}
+            <div className="flex gap-2 flex-wrap">
+              {socials.map(s => (
                 <a
-                  key={label}
-                  href={href}
+                  key={s.name}
+                  href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-violet-600 transition-colors"
-                  aria-label={label}
+                  className="flex items-center gap-1.5 bg-white/8 hover:bg-white/15 px-3 py-1.5 rounded-full text-xs text-white/60 hover:text-white transition-all"
+                  title={s.name}
                 >
-                  <Icon size={16} />
+                  <span>{s.icon}</span>
+                  <span>{s.handle}</span>
                 </a>
               ))}
             </div>
           </div>
 
           {/* Links */}
-          {Object.entries(links).map(([section, items]) => (
+          {Object.entries(footerLinks).map(([section, items]) => (
             <div key={section}>
-              <h3 className="font-bold text-sm text-white/80 uppercase tracking-wider mb-4">{section}</h3>
-              <ul className="space-y-3">
+              <h3 className="font-bold text-xs text-white/50 uppercase tracking-widest mb-4">{section}</h3>
+              <ul className="space-y-2.5">
                 {items.map(item => (
                   <li key={item.label}>
-                    <Link
-                      to={item.to}
-                      className="text-white/40 hover:text-white text-sm transition-colors"
-                    >
+                    <Link to={item.to} className="text-white/35 hover:text-white text-sm transition-colors">
                       {item.label}
                     </Link>
                   </li>
@@ -82,13 +100,14 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-white/30 text-sm">
+        <div className="border-t border-white/8 pt-8 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-white/25 text-xs">
             © 2025 Estudiantando. Todos los derechos reservados.
           </p>
-          <p className="text-white/20 text-xs">
-            Hecho con 💜 para estudiantes argentinos
-          </p>
+          <div className="flex items-center gap-3">
+            <span className="text-white/20 text-xs">Pagos seguros con</span>
+            <span className="bg-white/10 text-white/50 text-xs px-3 py-1 rounded-full">MercadoPago</span>
+          </div>
         </div>
       </div>
     </footer>

@@ -1,155 +1,124 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Sparkles, ChevronDown } from 'lucide-react'
+import { ArrowRight, ChevronDown } from 'lucide-react'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   show: (i = 0) => ({
-    opacity: 1,
-    y: 0,
+    opacity: 1, y: 0,
     transition: { duration: 0.7, delay: i * 0.15, ease: 'easeOut' },
   }),
 }
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-violet-950 via-violet-900 to-indigo-900">
-      {/* Animated background blobs */}
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#1c0a2a]">
+
+      {/* Animated blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -left-40 w-96 h-96 bg-violet-500/30 rounded-full blur-3xl blob-anim" />
-        <div className="absolute top-1/2 -right-40 w-80 h-80 bg-pink-500/20 rounded-full blur-3xl blob-anim" style={{ animationDelay: '2s' }} />
-        <div className="absolute bottom-0 left-1/3 w-64 h-64 bg-indigo-400/20 rounded-full blur-3xl blob-anim" style={{ animationDelay: '4s' }} />
+        <div className="absolute -top-40 -left-20 w-[500px] h-[500px] bg-[#f789da]/20 rounded-full blur-3xl blob-anim" />
+        <div className="absolute top-1/2 -right-40 w-96 h-96 bg-[#c41fa0]/15 rounded-full blur-3xl blob-anim" style={{ animationDelay: '3s' }} />
+        <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-[#f9be06]/10 rounded-full blur-3xl blob-anim" style={{ animationDelay: '6s' }} />
 
-        {/* Floating elements */}
-        <motion.div
-          className="absolute top-32 right-20 w-16 h-16 bg-gradient-to-br from-pink-400 to-orange-400 rounded-2xl shadow-2xl float-anim opacity-80"
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 0.8, scale: 1 }}
-          transition={{ delay: 0.8, type: 'spring' }}
-        >
-          <span className="flex items-center justify-center h-full text-2xl">📚</span>
-        </motion.div>
-
-        <motion.div
-          className="absolute top-52 left-16 w-14 h-14 bg-gradient-to-br from-violet-400 to-blue-400 rounded-full shadow-2xl float-anim-slow opacity-80"
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 0.8, scale: 1 }}
-          transition={{ delay: 1.0, type: 'spring' }}
-        >
-          <span className="flex items-center justify-center h-full text-xl">✏️</span>
-        </motion.div>
-
-        <motion.div
-          className="absolute bottom-40 right-32 w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl shadow-2xl float-anim-fast opacity-80"
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 0.8, scale: 1 }}
-          transition={{ delay: 1.2, type: 'spring' }}
-        >
-          <span className="flex items-center justify-center h-full text-xl">🎯</span>
-        </motion.div>
-
-        <motion.div
-          className="absolute top-64 right-1/3 w-10 h-10 bg-white/10 rounded-lg backdrop-blur border border-white/20 float-anim opacity-70"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.7 }}
-          transition={{ delay: 1.4 }}
-        >
-          <span className="flex items-center justify-center h-full text-lg">⭐</span>
-        </motion.div>
+        {/* Floating emoji elements */}
+        {[
+          { emoji: '📚', top: '15%', right: '8%', delay: 0.8, size: 'w-16 h-16', bg: 'from-[#f789da] to-[#c41fa0]' },
+          { emoji: '✏️', top: '40%', left: '4%', delay: 1.0, size: 'w-12 h-12', bg: 'from-[#f9be06] to-[#f789da]' },
+          { emoji: '🎯', bottom: '30%', right: '12%', delay: 1.2, size: 'w-14 h-14', bg: 'from-[#c41fa0] to-[#f789da]' },
+          { emoji: '🧠', top: '60%', left: '8%', delay: 1.4, size: 'w-10 h-10', bg: 'from-[#f789da]/30 to-transparent border border-white/10' },
+        ].map((el, i) => (
+          <motion.div
+            key={i}
+            className={`absolute ${el.size} rounded-2xl flex items-center justify-center text-2xl bg-gradient-to-br ${el.bg} shadow-xl float-anim`}
+            style={{ top: el.top, right: el.right, left: el.left, bottom: el.bottom, animationDelay: `${i * 1.5}s` }}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 0.9, scale: 1 }}
+            transition={{ delay: el.delay, type: 'spring', stiffness: 200 }}
+          >
+            {el.emoji}
+          </motion.div>
+        ))}
 
         {/* Grid pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.03]"
+        <div className="absolute inset-0 opacity-[0.04]"
           style={{
-            backgroundImage: 'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)',
-            backgroundSize: '60px 60px',
+            backgroundImage: 'linear-gradient(rgba(247,137,218,1) 1px, transparent 1px), linear-gradient(90deg, rgba(247,137,218,1) 1px, transparent 1px)',
+            backgroundSize: '50px 50px',
           }}
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
-        <div className="text-center max-w-4xl mx-auto">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20">
+        <div className="max-w-4xl mx-auto text-center">
 
           {/* Badge */}
           <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
-            custom={0}
-            className="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 text-white/90 px-4 py-2 rounded-full text-sm font-medium mb-8"
+            variants={fadeUp} initial="hidden" animate="show" custom={0}
+            className="inline-flex items-center gap-2 bg-white/8 backdrop-blur border border-white/15 text-white/80 px-4 py-2 rounded-full text-sm font-medium mb-8"
           >
-            <Sparkles size={14} className="text-amber-400" />
-            La plataforma que te ayuda a estudiar de verdad
+            <span className="w-2 h-2 rounded-full bg-[#f789da] animate-pulse" />
+            Tips para Estudiantes • Comunidad Estudiantando
           </motion.div>
 
-          {/* Title */}
+          {/* Main headline - exact copy from the site */}
           <motion.h1
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
-            custom={1}
-            className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6"
+            variants={fadeUp} initial="hidden" animate="show" custom={1}
+            className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-[1.1] mb-6"
           >
-            Aprendé a{' '}
-            <span className="relative inline-block">
-              <span className="relative z-10 gradient-text-2">organizarte</span>
-            </span>
-            {' '}y rendir{' '}
-            <span className="gradient-text-2">con confianza</span>
+            Aprendé cómo{' '}
+            <span className="gradient-text">organizarte</span>
+            {' '}y estudiar para ir a rendir{' '}
+            <span className="gradient-text">con seguridad</span>
           </motion.h1>
 
-          {/* Subtitle */}
+          {/* Subtitle - exact from site */}
           <motion.p
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
-            custom={2}
-            className="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto mb-10 leading-relaxed"
+            variants={fadeUp} initial="hidden" animate="show" custom={2}
+            className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto mb-4 leading-relaxed"
           >
-            Recursos, guías y herramientas diseñadas especialmente para estudiantes argentinos.
-            Dejá de estudiar sin dirección y empezá a ver resultados reales.
+            Accedé a beneficios exclusivos por ser parte de nuestra comunidad
           </motion.p>
 
-          {/* CTA Buttons */}
+          <motion.p
+            variants={fadeUp} initial="hidden" animate="show" custom={2.5}
+            className="text-base text-white/45 max-w-xl mx-auto mb-10 italic"
+          >
+            "Ser estudiante es un camino lleno de desafíos, por eso para atravesarlo necesitás voluntad, organización y ganas, muchas ganas."
+          </motion.p>
+
+          {/* CTAs */}
           <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
-            custom={3}
+            variants={fadeUp} initial="hidden" animate="show" custom={3}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Link
-              to="/tienda"
-              className="group inline-flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-orange-500 text-white px-8 py-4 rounded-2xl text-lg font-semibold hover:shadow-2xl hover:shadow-pink-500/30 hover:scale-105 transition-all duration-300"
-            >
-              Explorar recursos
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
             <button
               onClick={() => document.getElementById('quiz')?.scrollIntoView({ behavior: 'smooth' })}
-              className="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur border border-white/20 text-white px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-white/20 transition-all duration-300"
+              className="group inline-flex items-center justify-center gap-2 bg-[#f789da] hover:bg-[#c41fa0] text-white px-8 py-4 rounded-2xl text-lg font-semibold transition-all duration-300 hover:shadow-2xl hover:shadow-[#f789da]/30 hover:scale-105"
             >
-              <Sparkles size={20} className="text-amber-400" />
-              Hacer el test
+              ¡Hacé el TEST y descubrilo!
+              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </button>
+            <Link
+              to="/tienda"
+              className="inline-flex items-center justify-center gap-2 bg-white/8 backdrop-blur border border-white/20 text-white px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-white/15 transition-all duration-300"
+            >
+              Ver todos los recursos
+            </Link>
           </motion.div>
 
           {/* Stats */}
           <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
-            custom={4}
-            className="mt-16 grid grid-cols-3 gap-6 max-w-lg mx-auto"
+            variants={fadeUp} initial="hidden" animate="show" custom={4}
+            className="mt-16 grid grid-cols-3 gap-6 max-w-sm mx-auto border-t border-white/10 pt-10"
           >
             {[
               { value: '1000+', label: 'Estudiantes' },
-              { value: '50+', label: 'Recursos' },
-              { value: '4.9★', label: 'Valoración' },
+              { value: '23', label: 'Recursos' },
+              { value: '4.9★', label: 'Calificación' },
             ].map(stat => (
               <div key={stat.label} className="text-center">
-                <div className="text-3xl font-bold text-white">{stat.value}</div>
-                <div className="text-sm text-white/50 mt-1">{stat.label}</div>
+                <div className="text-2xl font-bold text-white">{stat.value}</div>
+                <div className="text-xs text-white/40 mt-1">{stat.label}</div>
               </div>
             ))}
           </motion.div>
@@ -159,7 +128,7 @@ export default function Hero() {
       {/* Scroll indicator */}
       <motion.button
         onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50 hover:text-white transition-colors"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/30 hover:text-white/70 transition-colors"
         animate={{ y: [0, 8, 0] }}
         transition={{ repeat: Infinity, duration: 2 }}
       >

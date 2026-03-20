@@ -1,46 +1,47 @@
 import { useRef, useState, useEffect } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react'
+import { Star, ChevronLeft, ChevronRight } from 'lucide-react'
 
+// Real product categories from estudiantando.com.ar
 const testimonials = [
   {
-    name: 'Valentina García',
-    role: 'Estudiante universitaria · Derecho',
+    name: 'Valentina G.',
+    product: 'Combo COMPLETITO',
     avatar: '👩‍🦱',
     rating: 5,
-    text: 'Después de tres años sintiéndome perdida, con el método de Estudiantando pude aprobar todas las materias del cuatrimestre. El planner cambió completamente mi forma de organizarme.',
+    text: 'Llevaba dos años sin rendir ninguna materia. Con la Guía de 6 pasos y el Kit de Planillas finalmente organicé todo y aprobé tres materias en el cuatrimestre. No lo podía creer.',
     location: 'Buenos Aires',
   },
   {
-    name: 'Matías Rodríguez',
-    role: 'Estudiante secundario · 5to año',
+    name: 'Matías R.',
+    product: 'Masterclass',
     avatar: '👨‍💻',
     rating: 5,
-    text: 'Siempre me agarraba el pánico antes de los exámenes. Con las técnicas que aprendí acá pude rendir Matemática que era mi peor materia. ¡Salí con un 9!',
+    text: 'Tenía materias pendientes de hace tres años. La Masterclass me cambió la forma de preparar los exámenes. Entendí que el problema no era que estudiaba poco, sino que no sabía cómo.',
     location: 'Córdoba',
   },
   {
-    name: 'Sofía Méndez',
-    role: 'Estudiante universitaria · Medicina',
+    name: 'Sofía M.',
+    product: 'Guía para rendir en 6 pasos',
     avatar: '👩‍⚕️',
     rating: 5,
-    text: 'La cantidad de información que hay en medicina es brutal. Las técnicas de memorización me salvaron la vida, especialmente los mapas mentales para anatomía.',
+    text: 'La guía de 6 pasos me ordenó la cabeza justo cuando más la necesitaba. Antes de rendir me sentía en pánico, ahora entro con un plan claro y mucho más tranquila.',
     location: 'Rosario',
   },
   {
-    name: 'Tomás Herrera',
-    role: 'Estudiante universitaria · Ingeniería',
+    name: 'Tomás H.',
+    product: 'Kit Planillas + Guía de organización',
     avatar: '👨‍🔬',
     rating: 5,
-    text: 'Reprobé la materia dos veces. Con el combo completo cambié todo: mi rutina, mis técnicas y mi mentalidad. Al tercer intento saqué un 8. Esto funciona de verdad.',
+    text: 'Nunca fui organizado. Con el Kit de Planillas y la Guía finalmente el día me empieza a alcanzar. Parece simple pero cambia todo.',
     location: 'Mendoza',
   },
   {
-    name: 'Lucía Fernández',
-    role: 'Estudiante secundario · 4to año',
+    name: 'Lucía F.',
+    product: 'Meditaciones de Mindfulness',
     avatar: '👧',
     rating: 5,
-    text: 'Mis papás siempre me decían que era vaga, pero lo que necesitaba era saber cómo estudiar. Ahora soy la primera de la clase y tengo tiempo libre.',
+    text: 'La meditación "para relajar previo a rendir" la escucho siempre antes de entrar al examen. Me ayuda a calmarme y a concentrarme. Es un recurso que no sabía que necesitaba.',
     location: 'Tucumán',
   },
 ]
@@ -51,45 +52,35 @@ export default function Testimonials() {
   const [current, setCurrent] = useState(0)
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent(c => (c + 1) % testimonials.length)
-    }, 5000)
+    const interval = setInterval(() => setCurrent(c => (c + 1) % testimonials.length), 5000)
     return () => clearInterval(interval)
   }, [])
 
-  const prev = () => setCurrent(c => (c - 1 + testimonials.length) % testimonials.length)
-  const next = () => setCurrent(c => (c + 1) % testimonials.length)
-
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-violet-50" ref={ref}>
+    <section className="py-24 bg-gradient-to-b from-[#fdf5fc] to-white" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
-          <span className="inline-block bg-violet-100 text-violet-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+          <span className="inline-block bg-[#fef0fc] text-[#c41fa0] text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
             Testimonios reales
           </span>
-          <h2 className="text-4xl lg:text-5xl font-bold text-violet-950 mb-4">
-            Historias que{' '}
-            <span className="gradient-text">nos inspiran</span>
+          <h2 className="text-4xl lg:text-5xl font-bold text-[#1c0a2a] mb-3">
+            Lo que dicen{' '}
+            <span className="gradient-text">nuestros estudiantes</span>
           </h2>
-          <p className="text-lg text-slate-500">Estudiantes reales con resultados reales</p>
+          <p className="text-[#808285]">Historias reales de estudiantes argentinos</p>
         </motion.div>
 
-        {/* Main testimonial */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative max-w-3xl mx-auto mb-8"
+          className="max-w-2xl mx-auto mb-8"
         >
-          <div className="absolute -top-6 -left-2 text-violet-200">
-            <Quote size={64} />
-          </div>
-
           <AnimatePresence mode="wait">
             <motion.div
               key={current}
@@ -97,27 +88,31 @@ export default function Testimonials() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -30 }}
               transition={{ duration: 0.35 }}
-              className="bg-white rounded-3xl p-8 lg:p-10 shadow-xl shadow-violet-100/50 border border-violet-100"
+              className="bg-white rounded-3xl p-8 lg:p-10 shadow-xl shadow-[#f789da]/8 border border-[#f9b3ef]/30"
             >
-              {/* Stars */}
-              <div className="flex gap-1 mb-6">
+              <div className="flex gap-1 mb-5">
                 {Array(testimonials[current].rating).fill(0).map((_, i) => (
-                  <Star key={i} size={18} className="fill-amber-400 text-amber-400" />
+                  <Star key={i} size={16} className="fill-[#f9be06] text-[#f9be06]" />
                 ))}
               </div>
 
-              <p className="text-lg lg:text-xl text-slate-700 leading-relaxed mb-8 font-medium">
+              <p className="text-lg text-[#1c0a2a] leading-relaxed mb-6 font-medium">
                 "{testimonials[current].text}"
               </p>
 
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-violet-100 to-pink-100 flex items-center justify-center text-2xl">
-                  {testimonials[current].avatar}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[#fef0fc] flex items-center justify-center text-xl">
+                    {testimonials[current].avatar}
+                  </div>
+                  <div>
+                    <p className="font-bold text-[#1c0a2a] text-sm">{testimonials[current].name}</p>
+                    <p className="text-xs text-[#808285]">{testimonials[current].location}</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-bold text-violet-950">{testimonials[current].name}</p>
-                  <p className="text-sm text-slate-400">{testimonials[current].role} · {testimonials[current].location}</p>
-                </div>
+                <span className="text-xs bg-[#fef0fc] text-[#c41fa0] px-3 py-1 rounded-full font-medium">
+                  {testimonials[current].product}
+                </span>
               </div>
             </motion.div>
           </AnimatePresence>
@@ -125,24 +120,26 @@ export default function Testimonials() {
 
         {/* Controls */}
         <div className="flex items-center justify-center gap-4">
-          <button onClick={prev} className="p-3 rounded-full bg-white border border-violet-200 text-violet-600 hover:bg-violet-600 hover:text-white hover:border-violet-600 transition-all shadow-sm">
-            <ChevronLeft size={20} />
+          <button
+            onClick={() => setCurrent(c => (c - 1 + testimonials.length) % testimonials.length)}
+            className="p-2.5 rounded-full bg-white border border-[#f9b3ef] text-[#c41fa0] hover:bg-[#f789da] hover:text-white hover:border-[#f789da] transition-all shadow-sm"
+          >
+            <ChevronLeft size={18} />
           </button>
-
           <div className="flex gap-2">
             {testimonials.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setCurrent(i)}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  i === current ? 'w-8 bg-violet-600' : 'w-2 bg-violet-200'
-                }`}
+                className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? 'w-8 bg-[#f789da]' : 'w-1.5 bg-[#f9b3ef]'}`}
               />
             ))}
           </div>
-
-          <button onClick={next} className="p-3 rounded-full bg-white border border-violet-200 text-violet-600 hover:bg-violet-600 hover:text-white hover:border-violet-600 transition-all shadow-sm">
-            <ChevronRight size={20} />
+          <button
+            onClick={() => setCurrent(c => (c + 1) % testimonials.length)}
+            className="p-2.5 rounded-full bg-white border border-[#f9b3ef] text-[#c41fa0] hover:bg-[#f789da] hover:text-white hover:border-[#f789da] transition-all shadow-sm"
+          >
+            <ChevronRight size={18} />
           </button>
         </div>
       </div>

@@ -1,40 +1,51 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Target, Brain, Calendar } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
-const features = [
+const categories = [
   {
-    icon: Target,
     emoji: '🎯',
     title: 'Quiero rendir',
-    desc: 'Estrategias probadas para preparar exámenes, manejar los nervios y entrar al aula con seguridad total.',
-    color: 'from-violet-500 to-purple-600',
-    bg: 'bg-violet-50',
-    border: 'border-violet-200',
-    tag: 'Más popular',
-    tagColor: 'bg-violet-100 text-violet-700',
+    desc: 'Estrategias paso a paso para preparar tus exámenes, manejar los nervios y entrar a rendir con seguridad total.',
+    gradient: 'from-[#f789da] to-[#c41fa0]',
+    lightBg: 'bg-[#fef0fc]',
+    border: 'border-[#f9b3ef]',
+    hoverShadow: 'hover:shadow-[#f789da]/20',
+    tag: 'Más buscado',
+    to: '/tienda',
   },
   {
-    icon: Brain,
     emoji: '🧠',
     title: 'Quiero aprender mejor',
-    desc: 'Técnicas de memorización, comprensión lectora y aprendizaje activo para absorber más en menos tiempo.',
-    color: 'from-pink-500 to-rose-500',
-    bg: 'bg-pink-50',
-    border: 'border-pink-200',
-    tag: 'Nuevo',
-    tagColor: 'bg-pink-100 text-pink-700',
+    desc: 'Técnicas de memorización, resumen, repaso y comprensión lectora para absorber más en menos tiempo.',
+    gradient: 'from-[#f9be06] to-[#f789da]',
+    lightBg: 'bg-yellow-50',
+    border: 'border-yellow-200',
+    hoverShadow: 'hover:shadow-yellow-200/40',
+    tag: 'Técnicas',
+    to: '/tienda',
   },
   {
-    icon: Calendar,
     emoji: '📅',
     title: 'Quiero organizarme',
-    desc: 'Sistemas de planificación, gestión del tiempo y rutinas de estudio que realmente funcionan.',
-    color: 'from-orange-400 to-amber-500',
-    bg: 'bg-amber-50',
-    border: 'border-amber-200',
+    desc: 'Sistemas de planificación, gestión del tiempo y planillas editables para que el día te alcance de verdad.',
+    gradient: 'from-[#c41fa0] to-[#f789da]',
+    lightBg: 'bg-purple-50',
+    border: 'border-purple-200',
+    hoverShadow: 'hover:shadow-purple-200/40',
     tag: 'Esencial',
-    tagColor: 'bg-amber-100 text-amber-700',
+    to: '/tienda',
+  },
+  {
+    emoji: '🧘',
+    title: 'Meditaciones',
+    desc: 'Audios guiados por Lissy Szwarcberg (Mindfulness Buenos Aires) para calmar la ansiedad y estudiar con más calma.',
+    gradient: 'from-blue-400 to-[#c41fa0]',
+    lightBg: 'bg-blue-50',
+    border: 'border-blue-200',
+    hoverShadow: 'hover:shadow-blue-200/40',
+    tag: 'Bienestar',
+    to: '/tienda',
   },
 ]
 
@@ -44,57 +55,54 @@ export default function Features() {
 
   return (
     <section className="py-24 bg-white relative overflow-hidden" ref={ref}>
-      {/* Background decoration */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-200 to-transparent" />
-      <div className="absolute -top-40 -right-40 w-80 h-80 bg-violet-50 rounded-full blur-3xl" />
-      <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-pink-50 rounded-full blur-3xl" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#f789da]/30 to-transparent" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="inline-block bg-violet-100 text-violet-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+          <span className="inline-block bg-[#fef0fc] text-[#c41fa0] text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
             ¿Qué necesitás?
           </span>
-          <h2 className="text-4xl lg:text-5xl font-bold text-violet-950 mb-4">
+          <h2 className="text-4xl lg:text-5xl font-bold text-[#1c0a2a] mb-4">
             Encontrá el recurso{' '}
             <span className="gradient-text">perfecto para vos</span>
           </h2>
-          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-            Tenemos herramientas para cada tipo de estudiante y cada desafío académico.
+          <p className="text-lg text-[#808285] max-w-xl mx-auto">
+            Cada herramienta fue creada pensando en el estudiante argentino real y sus desafíos.
           </p>
         </motion.div>
 
-        {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-8">
-          {features.map((f, i) => (
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {categories.map((cat, i) => (
             <motion.div
-              key={f.title}
+              key={cat.title}
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.15 }}
-              className={`group relative ${f.bg} border ${f.border} rounded-3xl p-8 card-hover cursor-pointer`}
+              transition={{ duration: 0.55, delay: i * 0.12 }}
             >
-              {/* Tag */}
-              <span className={`absolute top-5 right-5 text-xs font-semibold px-3 py-1 rounded-full ${f.tagColor}`}>
-                {f.tag}
-              </span>
+              <Link
+                to={cat.to}
+                className={`group block relative ${cat.lightBg} border ${cat.border} rounded-3xl p-7 card-hover hover:shadow-xl ${cat.hoverShadow} transition-all duration-300 h-full`}
+              >
+                <span className="absolute top-4 right-4 bg-white text-[#c41fa0] text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm">
+                  {cat.tag}
+                </span>
 
-              {/* Icon */}
-              <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${f.color} flex items-center justify-center text-3xl mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                {f.emoji}
-              </div>
+                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${cat.gradient} flex items-center justify-center text-3xl mb-5 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                  {cat.emoji}
+                </div>
 
-              <h3 className="text-2xl font-bold text-violet-950 mb-3">{f.title}</h3>
-              <p className="text-slate-500 leading-relaxed mb-6">{f.desc}</p>
+                <h3 className="text-lg font-bold text-[#1c0a2a] mb-2">{cat.title}</h3>
+                <p className="text-sm text-[#808285] leading-relaxed mb-4">{cat.desc}</p>
 
-              <button className={`flex items-center gap-2 text-sm font-semibold bg-gradient-to-r ${f.color} bg-clip-text text-transparent group-hover:gap-3 transition-all`}>
-                Ver recursos →
-              </button>
+                <span className="text-sm font-semibold text-[#c41fa0] group-hover:gap-2 flex items-center gap-1 transition-all">
+                  Ver recursos <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
+                </span>
+              </Link>
             </motion.div>
           ))}
         </div>
